@@ -103,7 +103,7 @@ prettier --check .           # lint
 - [x] Coordination slash commands (`list/status/send/run/chat/task/team`)
 - [x] Agent re-export generator (reads `.bwoc/agents.toml`)
 - [x] Deep-memory command
-- [ ] Skill re-export
+- [x] Skill re-export (generator: scripts/sync-skills.sh)
 - [ ] Smoke test inside Claude Code
 
 ## 🔗 BWOC host-adapter set

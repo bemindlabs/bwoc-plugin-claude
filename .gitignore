@@ -5,3 +5,5 @@
 node_modules/
 # Generated sub-agent files describe YOUR fleet — never committed (generic connector)
 /agents/agent-*.md
+# Re-exported framework skills describe YOUR workspace — never committed (generic connector)
+/skills/fw-*/
