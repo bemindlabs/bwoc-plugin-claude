@@ -28,7 +28,7 @@ It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, 
 | Surface | BWOC capability | Wraps |
 |---|---|---|
 | **Slash commands** | Coordinate the fleet | `bwoc list` · `status` · `send` · `run` · `chat` · `task` · `team` |
-| **Sub-agents** | Delegate to fleet members | `agents/agent-*` re-exported as Claude Code sub-agents |
+| **Sub-agents** | Delegate to any agent | generated **locally** from your workspace (not shipped) via `bash scripts/build.sh` |
 | **Skills** | Reuse BWOC skills | BWOC skills re-exported as `skills/<name>/SKILL.md` |
 | **Memory** | Shared deep-memory | `bwoc memory` bridge |
 
@@ -66,11 +66,11 @@ git clone https://github.com/bemindlabs/bwoc-plugin-claude
 
 ```text
 /bwoc:list                       # list registered agents
-/bwoc:status agent-luban         # health + identity snapshot
-/bwoc:send agent-luban "..."     # append a message to an agent's inbox
-/bwoc:run agent-luban "..."      # run a single task headless, capture result
+/bwoc:status <agent>         # health + identity snapshot
+/bwoc:send <agent> "..."     # append a message to an agent's inbox
+/bwoc:run <agent> "..."      # run a single task headless, capture result
 /bwoc:team list                  # Saṅgha teams
-@agent-luban                     # delegate to a fleet member as a sub-agent
+@<agent>                     # delegate to a fleet member as a sub-agent
 ```
 
 ## 🗂️ Repository layout
@@ -81,7 +81,7 @@ bwoc-plugin-claude/
 │   ├── plugin.json          # plugin manifest
 │   └── marketplace.json     # single-plugin marketplace
 ├── commands/                # slash commands wrapping `bwoc`
-├── agents/                  # BWOC agents re-exported as sub-agents
+├── agents/                  # generated locally from your workspace (gitignored)
 ├── skills/                  # BWOC skills (skills/<name>/SKILL.md)
 ├── hooks/hooks.json         # lifecycle hooks
 └── scripts/                 # validate.sh / build.sh
@@ -116,9 +116,9 @@ One of five BWOC → host adapters — **八仙過海・各顯神通** (the Eigh
 | OpenClaw | [bwoc-plugin-openclaw](https://github.com/bemindlabs/bwoc-plugin-openclaw) | 鐵拐李 Li Tieguai |
 | Hermes | [bwoc-plugin-hermes](https://github.com/bemindlabs/bwoc-plugin-hermes) | 漢鍾離 Han Zhongli |
 
-## 🙏 Steward
+## 🙏 Maintainer
 
-Maintained by **`agent-ludongbin`** (呂洞賓 Lü Dongbin) — leader of the Eight Immortals, sword in hand. The flagship adapter for the flagship host.
+Maintained by **Bemind Technology**, part of the BWOC host-adapter set. This connector is **generic**: it ships no agents, teams, or workspace identities of its own — it discovers your fleet from the local `bwoc` workspace at runtime.
 
 ## 🤝 Contributing
 

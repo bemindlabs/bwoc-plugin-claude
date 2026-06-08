@@ -5,17 +5,23 @@
 # file per registered agent into `agents/<id>.md`. Each sub-agent is a thin
 # wrapper that delegates to the fleet member via the `bwoc` CLI (run / send).
 #
-# Workspace resolution: BWOC_WORKSPACE env > default /Users/lps/workspaces/bwoc
+# This is a GENERIC connector: it ships no agents. The generated files land in
+# `agents/` and are gitignored — they describe YOUR fleet, not this repo's.
+# Workspace resolution: BWOC_WORKSPACE env (required — no default path).
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-WORKSPACE="${BWOC_WORKSPACE:-/Users/lps/workspaces/bwoc}"
+WORKSPACE="${BWOC_WORKSPACE:-}"
+if [[ -z "$WORKSPACE" ]]; then
+  echo "build: set BWOC_WORKSPACE to your BWOC workspace root (the dir holding .bwoc/agents.toml)." >&2
+  exit 2
+fi
 AGENTS_TOML="$WORKSPACE/.bwoc/agents.toml"
 OUT_DIR="$REPO_DIR/agents"
 
 if [[ ! -f "$AGENTS_TOML" ]]; then
   echo "build: agents.toml not found at $AGENTS_TOML" >&2
-  echo "build: set BWOC_WORKSPACE to your workspace root and retry." >&2
+  echo "build: point BWOC_WORKSPACE at a valid workspace root and retry." >&2
   exit 1
 fi
 

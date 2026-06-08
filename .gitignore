@@ -3,3 +3,5 @@
 .DS_Store
 .bwoc/
 node_modules/
+# Generated sub-agent files describe YOUR fleet — never committed (generic connector)
+/agents/agent-*.md
