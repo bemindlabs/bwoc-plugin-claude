@@ -1,0 +1,7 @@
+{
+  "name": "bwoc",
+  "owner": { "name": "Bemind Technology" },
+  "plugins": [
+    { "name": "bwoc", "source": "./", "description": "BWOC fleet adapter for Claude Code." }
+  ]
+}

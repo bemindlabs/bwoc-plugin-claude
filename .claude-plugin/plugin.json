@@ -1,0 +1,9 @@
+{
+  "name": "bwoc",
+  "version": "0.0.1",
+  "description": "BWOC fleet adapter for Claude Code — coordination, agents, skills, and deep-memory via the bwoc CLI.",
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}
