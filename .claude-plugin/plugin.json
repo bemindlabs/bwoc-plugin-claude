@@ -1,7 +1,15 @@
 {
   "name": "bwoc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "BWOC fleet adapter for Claude Code — coordination, agents, skills, and deep-memory via the bwoc CLI.",
+  "author": {
+    "name": "BeMind Labs",
+    "url": "https://github.com/bemindlabs"
+  },
+  "homepage": "https://github.com/bemindlabs/bwoc-plugin-claude",
+  "repository": "https://github.com/bemindlabs/bwoc-plugin-claude",
+  "license": "MIT",
+  "keywords": ["bwoc", "agents", "fleet", "coordination", "memory", "cli"],
   "commands": "./commands/",
   "agents": "./agents/",
   "skills": "./skills/",
