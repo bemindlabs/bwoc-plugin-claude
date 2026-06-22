@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: plugin structural smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # `jq` is preinstalled on ubuntu-latest; shellcheck verifies the scripts.
+      - name: Lint scripts
+        # Gate on warning+error (real bugs); info-level style nits (e.g. SC2016
+        # on intentional printf format strings) are advisory, not failures.
+        run: shellcheck -S warning scripts/*.sh
+      - name: Structural smoke (validate.sh)
+        # `bwoc` isn't on PATH in CI — validate.sh treats that as an advisory
+        # warning (exit 0), since it gates structure, not the runtime CLI.
+        run: bash scripts/validate.sh

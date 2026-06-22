@@ -7,7 +7,7 @@
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   <a href="https://bemindlabs.github.io/bwoc-handbook/"><img alt="Handbook" src="https://img.shields.io/badge/docs-BWOC%20Handbook-1f6feb"></a>
-  <img alt="Status" src="https://img.shields.io/badge/status-WIP-orange">
+  <img alt="Status" src="https://img.shields.io/badge/status-beta-blue">
   <img alt="Host" src="https://img.shields.io/badge/host-Claude%20Code-d97757">
   <img alt="Part of BWOC" src="https://img.shields.io/badge/part%20of-BWOC-6f42c1">
   <img alt="Mechanism" src="https://img.shields.io/badge/mechanism-wraps%20bwoc%20CLI-informational">
@@ -22,7 +22,7 @@
 It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, skills, and hooks that wrap the `bwoc` CLI. No background server, no daemon.
 
 > [!NOTE]
-> **Status: WIP.** Coordination commands, the agent re-export generator, a fleet skill, and hooks are implemented and wrap the `bwoc` CLI. Remaining: skill re-export and a host smoke-test — see the [roadmap](#️-roadmap).
+> **Status: beta.** All components are implemented — coordination commands, the agent re-export generator, the skill re-export, a fleet skill, and hooks — and a structural smoke (`./scripts/validate.sh`) passes (manifests, command frontmatter, hook events, marketplace source, CLI presence). The one remaining step is interactive acceptance: `/plugin install` in a live Claude Code session.
 
 ## 🧩 What it exposes
 
@@ -104,7 +104,8 @@ prettier --check .           # lint
 - [x] Agent re-export generator (reads `.bwoc/agents.toml`)
 - [x] Deep-memory command
 - [x] Skill re-export (generator: scripts/sync-skills.sh)
-- [ ] Smoke test inside Claude Code
+- [x] Structural smoke test (`scripts/validate.sh` — manifests, command frontmatter, hook events, marketplace, CLI presence)
+- [ ] Interactive acceptance: `/plugin install` in a live Claude Code session (human step)
 
 ## 🔗 BWOC host-adapter set
 
