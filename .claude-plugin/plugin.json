@@ -1,6 +1,6 @@
 {
   "name": "bwoc",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "BWOC fleet adapter for Claude Code — coordination, agents, skills, and deep-memory via the bwoc CLI.",
   "author": {
     "name": "BeMind Labs",
