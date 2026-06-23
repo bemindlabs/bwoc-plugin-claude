@@ -9,7 +9,7 @@
       "name": "bwoc",
       "source": "./",
       "description": "BWOC fleet adapter for Claude Code — coordinate an agent fleet, run headless tasks, and read shared memory by wrapping the bwoc CLI.",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "keywords": ["bwoc", "agents", "fleet", "coordination", "memory"],
       "license": "MIT",
       "homepage": "https://github.com/bemindlabs/bwoc-plugin-claude"
