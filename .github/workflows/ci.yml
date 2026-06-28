@@ -20,6 +20,10 @@ jobs:
         # Gate on warning+error (real bugs); info-level style nits (e.g. SC2016
         # on intentional printf format strings) are advisory, not failures.
         run: shellcheck -S warning scripts/*.sh
+      - name: Check formatting (Prettier)
+        # Markdown is hand-formatted to the house README style and excluded via
+        # .prettierignore; this gates JSON manifests so they stay canonical.
+        run: npx --yes prettier@3 --check .
       - name: Structural smoke (validate.sh)
         # `bwoc` isn't on PATH in CI — validate.sh treats that as an advisory
         # warning (exit 0), since it gates structure, not the runtime CLI.

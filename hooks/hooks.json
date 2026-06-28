@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "command -v bwoc >/dev/null 2>&1 && echo \"BWOC fleet available — $(bwoc list --count 2>/dev/null || echo '?') agents. Use /bwoc:list, /bwoc:status, /bwoc:send, /bwoc:run, /bwoc:team, /bwoc:task, /bwoc:memory.\" || echo 'BWOC: bwoc CLI not found on PATH — install it to use the fleet commands.'"
+            "command": "command -v bwoc >/dev/null 2>&1 && echo \"BWOC fleet available — $(bwoc list --count 2>/dev/null || echo '?') agents. Use /bwoc:list, /bwoc:status, /bwoc:send, /bwoc:run, /bwoc:chat, /bwoc:team, /bwoc:task, /bwoc:memory.\" || echo 'BWOC: bwoc CLI not found on PATH — install it to use the fleet commands.'"
           }
         ]
       }
