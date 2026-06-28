@@ -7,7 +7,8 @@
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   <a href="https://bemindlabs.github.io/bwoc-handbook/"><img alt="Handbook" src="https://img.shields.io/badge/docs-BWOC%20Handbook-1f6feb"></a>
-  <img alt="Status" src="https://img.shields.io/badge/status-beta-blue">
+  <img alt="Status" src="https://img.shields.io/badge/status-stable-success">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-blue">
   <img alt="Host" src="https://img.shields.io/badge/host-Claude%20Code-d97757">
   <img alt="Part of BWOC" src="https://img.shields.io/badge/part%20of-BWOC-6f42c1">
   <img alt="Mechanism" src="https://img.shields.io/badge/mechanism-wraps%20bwoc%20CLI-informational">
@@ -22,15 +23,20 @@
 It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, skills, and hooks that wrap the `bwoc` CLI. No background server, no daemon.
 
 > [!NOTE]
-> **Status: beta.** All components are implemented — coordination commands, the agent re-export generator, the skill re-export, a fleet skill, and hooks — and a structural smoke (`./scripts/validate.sh`) passes (manifests, command frontmatter, hook events, marketplace source, CLI presence). The one remaining step is interactive acceptance: `/plugin install` in a live Claude Code session.
+> **Status: stable (v1.1.0).** All components ship and pass the structural smoke
+> (`./scripts/validate.sh`): manifests, command **and** skill frontmatter, hook events,
+> marketplace source, and CLI presence. The plugin exposes 8 slash commands, seven bundled
+> skills (`bwoc-fleet`, `bwoc-health`, `bwoc-lifecycle`, `bwoc-knowledge`, `bwoc-quality`,
+> `bwoc-messaging`, `bwoc-council`), the local agent/skill re-export generators, and
+> lifecycle hooks. Install it with `/plugin install` in a live Claude Code session.
 
 ## 🧩 What it exposes
 
 | Surface | BWOC capability | Wraps |
 |---|---|---|
-| **Slash commands** | Coordinate the fleet | `bwoc list` · `status` · `send` · `run` · `chat` · `task` · `team` |
+| **Slash commands** | Coordinate the fleet | `bwoc list` · `status` · `send` · `run` · `chat` · `task` · `team` · `memory` |
 | **Sub-agents** | Delegate to any agent | generated **locally** from your workspace (not shipped) via `bash scripts/build.sh` |
-| **Skills** | Reuse BWOC skills | BWOC skills re-exported as `skills/<name>/SKILL.md` |
+| **Skills** | Teach the host BWOC workflows | shipped: `bwoc-fleet` · `bwoc-health` · `bwoc-lifecycle` · `bwoc-knowledge` · `bwoc-quality` · `bwoc-messaging` · `bwoc-council` · plus framework `fw-*` skills re-exported locally |
 | **Memory** | Shared deep-memory | `bwoc memory` bridge |
 
 ## 🏗️ How it works
@@ -72,8 +78,15 @@ git clone https://github.com/bemindlabs/bwoc-plugin-claude
 /bwoc:send <agent> "..."     # append a message to an agent's inbox
 /bwoc:run <agent> "..."      # run a single task headless, capture result
 /bwoc:team list                  # Saṅgha teams
+/bwoc:memory search "..."    # recall workspace deep-memory
 @<agent>                     # delegate to a fleet member as a sub-agent
 ```
+
+The bundled **skills** add deeper, topical guidance the host invokes automatically:
+`bwoc-fleet` (coordination), `bwoc-health` (diagnostics), `bwoc-lifecycle` (incarnate /
+stop / start / retire), `bwoc-knowledge` (memory + notes / retro / research),
+`bwoc-quality` (check / validate / audit gates), `bwoc-messaging` (inbox read + triage +
+send), and `bwoc-council` (governed decisions + OKRs).
 
 ## 🗂️ Repository layout
 
@@ -92,9 +105,9 @@ bwoc-plugin-claude/
 ## 🛠️ Development
 
 ```bash
-bash scripts/validate.sh     # validate plugin.json / marketplace.json
+bash scripts/validate.sh     # structural smoke (manifests, command + skill frontmatter, hooks)
 bash scripts/build.sh        # regenerate the host tree from the live workspace
-prettier --check .           # lint
+npx prettier --check .       # lint JSON manifests (markdown is hand-styled; see .prettierignore)
 ```
 
 ## 🗺️ Roadmap
@@ -104,7 +117,9 @@ prettier --check .           # lint
 - [x] Agent re-export generator (reads `.bwoc/agents.toml`)
 - [x] Deep-memory command
 - [x] Skill re-export (generator: scripts/sync-skills.sh)
-- [x] Structural smoke test (`scripts/validate.sh` — manifests, command frontmatter, hook events, marketplace, CLI presence)
+- [x] Bundled coordination skills (`bwoc-fleet` · `bwoc-health` · `bwoc-lifecycle` · `bwoc-knowledge`)
+- [x] Structural smoke test (`scripts/validate.sh` — manifests, command **and** skill frontmatter, hook events, marketplace, CLI presence)
+- [x] Community-health files (CONTRIBUTING · SECURITY · CODE_OF_CONDUCT · issue/PR templates)
 - [ ] Interactive acceptance: `/plugin install` in a live Claude Code session (human step)
 
 ## 🔗 BWOC host-adapter set

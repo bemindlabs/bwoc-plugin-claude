@@ -53,6 +53,22 @@ else
   done
 fi
 
+# 3b. Every committed skill has frontmatter with name + description.
+skills=(skills/*/SKILL.md)
+if [ ${#skills[@]} -eq 0 ]; then
+  warn "no committed skills under skills/*/SKILL.md"
+else
+  for s in "${skills[@]}"; do
+    base="$(basename "$(dirname "$s")")"
+    if [ "$(head -1 "$s")" != "---" ]; then bad "$s: missing frontmatter (--- on line 1)"; continue; fi
+    if awk '/^---$/{n++; next} n==1 && /^name:/{name=1} n==1 && /^description:/{desc=1} END{exit !(name && desc)}' "$s"; then
+      ok "skill $base frontmatter (name + description)"
+    else
+      bad "$s: frontmatter needs both 'name:' and 'description:'"
+    fi
+  done
+fi
+
 # 4. Hook events are known + entries are well-formed.
 known='SessionStart SessionEnd PreToolUse PostToolUse UserPromptSubmit Stop SubagentStop Notification PreCompact'
 for ev in $(jq -r '.hooks | keys[]' hooks/hooks.json 2>/dev/null); do
@@ -76,6 +92,21 @@ if command -v bwoc >/dev/null 2>&1; then
   ok "bwoc CLI on PATH ($(bwoc list --count 2>/dev/null || echo '?') agents in cwd workspace)"
 else
   warn "bwoc CLI not on PATH — commands need it at runtime (the SessionStart hook says so too)"
+fi
+
+# 7. Advisory: each slash command wraps a real `bwoc` verb (only when the CLI is present).
+#    Commands are named commands/bwoc-<verb>.md; we check `bwoc <verb> --help` resolves.
+#    This is advisory (warn, not fail) so the structural gate stays runtime-independent.
+if command -v bwoc >/dev/null 2>&1; then
+  for c in commands/bwoc-*.md; do
+    [ -e "$c" ] || continue
+    verb="$(basename "$c" .md)"; verb="${verb#bwoc-}"
+    if bwoc "$verb" --help >/dev/null 2>&1; then
+      ok "command /bwoc:$verb wraps a live verb (bwoc $verb)"
+    else
+      warn "command /bwoc:$verb → 'bwoc $verb --help' did not resolve (verb renamed/removed?)"
+    fi
+  done
 fi
 
 echo

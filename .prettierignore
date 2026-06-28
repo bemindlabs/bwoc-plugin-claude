@@ -1,0 +1,10 @@
+# Dependencies / generated / workspace state
+node_modules/
+/worktrees/
+.bwoc/
+# Generated, gitignored host trees (describe YOUR workspace, not this repo)
+/agents/agent-*.md
+/skills/fw-*/
+# Markdown is hand-formatted to the BWOC house README style (centered hero,
+# manual line wrapping, custom tables) — Prettier would fight it. Lint JSON only.
+**/*.md
