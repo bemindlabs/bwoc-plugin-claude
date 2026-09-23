@@ -25,7 +25,7 @@ verbs are thin wrappers over the `bwoc` CLI. Discover exact flags with `bwoc <ve
 
 ```bash
 bwoc council propose "<question>" --options "a,b,c" --team <team>   # open a decision
-bwoc council discuss <decision> --as <agent> "<turn>"   # add a round turn (routes via inbox)
+bwoc council discuss <decision> --as <agent> --message "<turn>"   # add a round turn (routes via inbox)
 bwoc council vote <decision> --as <agent> --option <opt>   # cast/re-cast a vote (append-only)
 bwoc council vote <decision> --as <agent> --abstain        # abstain
 bwoc council resolve <decision>     # tally per the voting model, check quorum, record outcome
@@ -42,7 +42,7 @@ with `bwoc council <verb> --help` — they are plugin-driven.
 ```bash
 bwoc okr list                   # installed okr-kind plugins (enabled + disabled)
 bwoc okr show <plugin>          # a plugin's SPEC + objectives summary
-bwoc okr track <kr> --value <n> # record a key result's current value (writes local TOML)
+bwoc okr track <plugin> --key-result <kr> --current <n>   # record a key result's current value (writes local TOML)
 bwoc okr report                 # OKR Progress Schema JSON for every key result
 ```
 
