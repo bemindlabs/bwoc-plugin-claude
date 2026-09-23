@@ -8,6 +8,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- **Three more skill commands match bwoc 3.x.** `bwoc-council`: `council discuss` takes the turn as `--message "<turn>"`, and `okr track` is `<plugin> --key-result <kr> --current <n>` (there is no `--value`). `bwoc-lifecycle`: `bwoc spawn <agent>` does not exist — it takes `--path`/`--backend`; the skill now points at `bwoc chat <agent>`, which resolves both.
 - **`bwoc-knowledge` skill uses verbs that exist.** It told Claude to run `bwoc notes add`, `notes show`, `retro add` and `research add`, which bwoc never had (the verbs were `new`/`list`/`view`), and `bwoc doc <kind> …` in the wrong order; on bwoc 3.x the per-kind commands are also deprecated aliases. It now uses `bwoc doc new|list|view <kind>` with the real kind names (`notes`, `retrospectives`, `research`) and documents `memory search --tier 2`.
 
 ## [1.1.0] - 2026-06-28

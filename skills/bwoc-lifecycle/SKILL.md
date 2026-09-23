@@ -46,11 +46,11 @@ neutrality.
 ```bash
 bwoc stop <name>               # pause: set status = "stopped" (files kept); --all for the fleet
 bwoc start <name>              # reactivate a stopped agent; --all to resume the fleet
-bwoc spawn <agent>             # exec the backend CLI in the agent's dir (interactive — surface to the user)
+bwoc chat <agent>              # open the agent's backend interactively (surface to the user); low-level: bwoc spawn --path <dir> --backend <b>
 bwoc supervise <agent>        # keep the daemon up: restart on crash, exit cleanly when stopped
 ```
 
-`bwoc spawn` and `bwoc supervise` exec/attach to long-running processes — surface them to
+`bwoc chat`, `bwoc spawn` and `bwoc supervise` exec/attach to long-running processes — surface them to
 the user rather than running them blind inside the non-interactive Bash tool.
 
 ## Retire (vaya)
