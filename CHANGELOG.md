@@ -4,6 +4,12 @@ All notable changes to the BWOC Claude Code plugin are documented here. The
 format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **`bwoc-knowledge` skill uses verbs that exist.** It told Claude to run `bwoc notes add`, `notes show`, `retro add` and `research add`, which bwoc never had (the verbs were `new`/`list`/`view`), and `bwoc doc <kind> …` in the wrong order; on bwoc 3.x the per-kind commands are also deprecated aliases. It now uses `bwoc doc new|list|view <kind>` with the real kind names (`notes`, `retrospectives`, `research`) and documents `memory search --tier 2`.
+
 ## [1.1.0] - 2026-06-28
 
 Coordination skills, repo hygiene, and a doc-consistency pass.
