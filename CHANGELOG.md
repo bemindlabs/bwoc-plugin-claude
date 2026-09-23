@@ -6,6 +6,10 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **CLI contract check.** `scripts/cli-contract.py` runs every `bwoc …` command in commands/skills/agents through the real CLI as `<argv> --help` (the parser rejects an unknown subcommand or flag; nothing executes). CI installs the latest bwoc release for it and runs nightly, so a bwoc release that breaks a documented command shows up here.
+
 ### Fixed
 
 - **Three more skill commands match bwoc 3.x.** `bwoc-council`: `council discuss` takes the turn as `--message "<turn>"`, and `okr track` is `<plugin> --key-result <kr> --current <n>` (there is no `--value`). `bwoc-lifecycle`: `bwoc spawn <agent>` does not exist — it takes `--path`/`--backend`; the skill now points at `bwoc chat <agent>`, which resolves both.
