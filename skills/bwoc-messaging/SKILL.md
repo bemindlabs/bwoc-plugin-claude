@@ -52,6 +52,27 @@ bwoc inbox <agent> --clear         # acknowledge + truncate (asks to confirm)
 bwoc inbox <agent> --clear --yes   # required in non-TTY; skips the confirmation
 ```
 
+## Was it delivered? Was it read?
+
+```bash
+bwoc receipts --message-id <id>     # did the recipient consume this message (id from `bwoc send`)
+bwoc receipts --agent <agent>       # every receipt an agent recorded; --from <sender> to filter
+bwoc outbox                         # messages still waiting to reach a peer workspace
+bwoc outbox flush                   # retry delivery now (MUTATING); --peer <name> for one peer
+```
+
+Reach for `receipts` before re-sending — a message that was read does not need a second copy.
+
+## Rule-based triage
+
+```bash
+bwoc triage <agent> --dry-run       # classify the inbox backlog + digest; changes nothing
+bwoc triage <agent>                 # same, but records receipts and forwards (MUTATING)
+```
+
+`triage --loop` keeps polling until stopped — a long-running process, so surface it to the
+user rather than running it inside the non-interactive Bash tool.
+
 ## Daemon logs (read-only)
 
 ```bash
@@ -60,7 +81,8 @@ bwoc log <agent>               # tail the agent's daemon log (.bwoc/agent.log �
 
 ## Safety
 
-- `inbox` reads and `log` are read-only. `send` and `inbox --clear` are **mutating** —
+- `inbox`, `log`, `receipts`, `outbox` and `triage --dry-run` are read-only. `send`,
+  `outbox flush`, `triage` and `inbox --clear` are **mutating** —
   `--clear` is destructive (it deletes messages), so read them first and confirm intent.
 - Never `--clear` an inbox you have not actually surfaced to the user.
 - Target a specific workspace with `--workspace <path>` (or `BWOC_WORKSPACE`).

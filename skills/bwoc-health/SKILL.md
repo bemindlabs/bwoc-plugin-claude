@@ -47,6 +47,18 @@ bwoc trust <agent>             # Kalyāṇamitta-7 trust profile (declared + req
 bwoc ping <agent>              # liveness check for a served agent (PING → PONG)
 ```
 
+## Version, guide and what is installed (read-only)
+
+```bash
+bwoc update --check            # compare this bwoc with the latest release
+bwoc handbook                  # offline quick guide: list sections; `bwoc handbook <section>`
+bwoc skill list                # framework skills in this workspace (--json for structure)
+bwoc plugin list               # framework plugins (--kind <kind>, --enabled to filter)
+```
+
+`bwoc update --run` performs the upgrade (e.g. delegates to `brew upgrade bwoc`) — a
+**mutating**, machine-level change: confirm with the user first.
+
 ## Triage flow
 
 1. Start broad: `bwoc fleet health` + `bwoc doctor` to see workspace-level signals.
@@ -56,7 +68,8 @@ bwoc ping <agent>              # liveness check for a served agent (PING → PON
 
 ## Safety
 
-- Every verb here is read-only **except** `bwoc doctor --auto` — confirm before that one.
+- Every verb here is read-only **except** `bwoc doctor --auto` and `bwoc update --run` —
+  confirm before either.
 - Treat a non-empty inbox or `stopped` status as a finding to report, not to silently fix.
 - Target a specific workspace with `--workspace <path>` (or `BWOC_WORKSPACE`) when the cwd
   is not inside the intended workspace.
