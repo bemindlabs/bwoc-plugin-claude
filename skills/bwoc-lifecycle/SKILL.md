@@ -53,6 +53,17 @@ bwoc supervise <agent>        # keep the daemon up: restart on crash, exit clean
 `bwoc chat`, `bwoc spawn` and `bwoc supervise` exec/attach to long-running processes — surface them to
 the user rather than running them blind inside the non-interactive Bash tool.
 
+## Reconfigure in place
+
+```bash
+bwoc set <name> --backend <backend>              # switch the backend an agent runs on (MUTATING)
+bwoc set <name> --primary-model <model>          # change its model; --fallback-model <model> too
+bwoc set <name> --backend <b> --primary-model <m> --json   # both at once, structured result
+```
+
+`set` rewrites the agent's manifest — confirm intent, and prefer it over hand-editing
+`config.manifest.json` so the change stays valid.
+
 ## Retire (vaya)
 
 ```bash

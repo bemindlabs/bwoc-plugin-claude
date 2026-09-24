@@ -6,6 +6,16 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-24
+
+The skills reach the bwoc 3.x verbs they were missing.
+
+### Added
+
+- **`bwoc-lifecycle`: reconfigure in place** — `bwoc set <name> --backend / --primary-model / --fallback-model`, marked mutating, preferred over hand-editing the manifest.
+- **`bwoc-messaging`: delivery and triage** — `bwoc receipts` (was the message read, by id / agent / sender), `bwoc outbox` and `outbox flush` (peer delivery queue), and `bwoc triage <agent>` with `--dry-run` as the safe preview; each marked read-only or mutating.
+- **`bwoc-health`: version, guide, inventory** — `bwoc update --check` (`--run` flagged as a machine-level change), `bwoc handbook [section]`, `bwoc skill list`, `bwoc plugin list`.
+
 ## [1.1.2] - 2026-09-24
 
 Skill commands that work on bwoc 3.x, and a CI check that keeps them working.
