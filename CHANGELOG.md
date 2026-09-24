@@ -6,6 +6,12 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-24
+
+### Added
+
+- **`bwoc-loops` skill — Loop-Engineering from Claude Code.** `bwoc monitor` (probe once, alert a fleet agent on an OK↔tripped transition, stable `--id` ledger), `bwoc digest` (deliver at most once per hourly/daily/weekly period, to stdout or `--out`), and `bwoc loop` (the goal-loop control center). The one-shot modes are for Claude to run; `bwoc loop` and every `--loop` run until stopped, so they are handed to the user or a supervisor. `--exec` runs a shell command, so the skill only uses one the user gave or approved.
+
 ## [1.2.0] - 2026-09-24
 
 The skills reach the bwoc 3.x verbs they were missing.
