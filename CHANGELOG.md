@@ -6,6 +6,10 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-09-24
+
+Skill commands that work on bwoc 3.x, and a CI check that keeps them working.
+
 ### Added
 
 - **CLI contract check.** `scripts/cli-contract.py` runs every `bwoc …` command in commands/skills/agents through the real CLI as `<argv> --help` (the parser rejects an unknown subcommand or flag; nothing executes). CI installs the latest bwoc release for it and runs nightly, so a bwoc release that breaks a documented command shows up here.
@@ -14,6 +18,12 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **Three more skill commands match bwoc 3.x.** `bwoc-council`: `council discuss` takes the turn as `--message "<turn>"`, and `okr track` is `<plugin> --key-result <kr> --current <n>` (there is no `--value`). `bwoc-lifecycle`: `bwoc spawn <agent>` does not exist — it takes `--path`/`--backend`; the skill now points at `bwoc chat <agent>`, which resolves both.
 - **`bwoc-knowledge` skill uses verbs that exist.** It told Claude to run `bwoc notes add`, `notes show`, `retro add` and `research add`, which bwoc never had (the verbs were `new`/`list`/`view`), and `bwoc doc <kind> …` in the wrong order; on bwoc 3.x the per-kind commands are also deprecated aliases. It now uses `bwoc doc new|list|view <kind>` with the real kind names (`notes`, `retrospectives`, `research`) and documents `memory search --tier 2`.
+
+## [1.1.1] - 2026-07-27
+
+### Changed
+
+- **Docs: seven host adapters.** The README counted the BWOC host adapters without Cursor and Vercel (#5). The plugin manifest kept `1.1.0` in this tag; 1.1.2 brings it back in line.
 
 ## [1.1.0] - 2026-06-28
 
