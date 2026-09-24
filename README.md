@@ -25,9 +25,9 @@ It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, 
 > [!NOTE]
 > **Status: stable (v1.1.0).** All components ship and pass the structural smoke
 > (`./scripts/validate.sh`): manifests, command **and** skill frontmatter, hook events,
-> marketplace source, and CLI presence. The plugin exposes 8 slash commands, seven bundled
+> marketplace source, and CLI presence. The plugin exposes 8 slash commands, eight bundled
 > skills (`bwoc-fleet`, `bwoc-health`, `bwoc-lifecycle`, `bwoc-knowledge`, `bwoc-quality`,
-> `bwoc-messaging`, `bwoc-council`), the local agent/skill re-export generators, and
+> `bwoc-messaging`, `bwoc-council`, `bwoc-loops`), the local agent/skill re-export generators, and
 > lifecycle hooks. Install it with `/plugin install` in a live Claude Code session.
 
 ## 🧩 What it exposes
@@ -36,7 +36,7 @@ It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, 
 |---|---|---|
 | **Slash commands** | Coordinate the fleet | `bwoc list` · `status` · `send` · `run` · `chat` · `task` · `team` · `memory` |
 | **Sub-agents** | Delegate to any agent | generated **locally** from your workspace (not shipped) via `bash scripts/build.sh` |
-| **Skills** | Teach the host BWOC workflows | shipped: `bwoc-fleet` · `bwoc-health` · `bwoc-lifecycle` · `bwoc-knowledge` · `bwoc-quality` · `bwoc-messaging` · `bwoc-council` · plus framework `fw-*` skills re-exported locally |
+| **Skills** | Teach the host BWOC workflows | shipped: `bwoc-fleet` · `bwoc-health` · `bwoc-lifecycle` · `bwoc-knowledge` · `bwoc-quality` · `bwoc-messaging` · `bwoc-council` · `bwoc-loops` · plus framework `fw-*` skills re-exported locally |
 | **Memory** | Shared deep-memory | `bwoc memory` bridge |
 
 ## 🏗️ How it works
@@ -86,7 +86,8 @@ The bundled **skills** add deeper, topical guidance the host invokes automatical
 `bwoc-fleet` (coordination), `bwoc-health` (diagnostics), `bwoc-lifecycle` (incarnate /
 stop / start / retire), `bwoc-knowledge` (memory + notes / retro / research),
 `bwoc-quality` (check / validate / audit gates), `bwoc-messaging` (inbox read + triage +
-send), and `bwoc-council` (governed decisions + OKRs).
+send), `bwoc-council` (governed decisions + OKRs), and `bwoc-loops` (goal-loop, monitor,
+digest).
 
 ## 🗂️ Repository layout
 

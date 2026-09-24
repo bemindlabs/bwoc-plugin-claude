@@ -11,6 +11,7 @@ Two kinds of skills live here:
   - `bwoc-quality` — verification gates (check, workspace validate/prune, audit).
   - `bwoc-messaging` — inbox read/triage, send, daemon logs.
   - `bwoc-council` — governed decisions (council propose/vote/resolve) + OKRs.
+  - `bwoc-loops` — Loop-Engineering: goal-loop TUI, monitor (alert on change), digest.
 - **`fw-*` (generated, gitignored)** — BWOC framework skills re-exported from **your**
   workspace. Generate them locally:
 
