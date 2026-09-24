@@ -6,6 +6,12 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-09-24
+
+### Fixed
+
+- **The plugin installs on current Claude Code.** `plugin.json` declared `"agents": "./agents/"`, which Claude Code 2.1 rejects (`agents: Invalid input`), so `/plugin install bwoc@bwoc` failed. The field is removed — `agents/` is discovered by default — and the marketplace gains the description the validator asks for. `claude plugin validate .` now passes clean.
+
 ## [1.3.0] - 2026-09-24
 
 ### Added
