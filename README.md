@@ -107,7 +107,7 @@ bwoc-plugin-claude/
 
 ```bash
 bash scripts/validate.sh     # structural smoke (manifests, command + skill frontmatter, hooks)
-bash scripts/build.sh        # regenerate the host tree from the live workspace
+BWOC_WORKSPACE=/path/to/workspace bash scripts/build.sh   # generate agents/<id>.md for your fleet (gitignored)
 npx prettier --check .       # lint JSON manifests (markdown is hand-styled; see .prettierignore)
 ```
 
