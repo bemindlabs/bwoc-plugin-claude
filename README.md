@@ -8,7 +8,7 @@
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg">
   <a href="https://bemindlabs.github.io/bwoc-handbook/"><img alt="Handbook" src="https://img.shields.io/badge/docs-BWOC%20Handbook-1f6feb"></a>
   <img alt="Status" src="https://img.shields.io/badge/status-stable-success">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-blue">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.3.1-blue">
   <img alt="Host" src="https://img.shields.io/badge/host-Claude%20Code-d97757">
   <img alt="Part of BWOC" src="https://img.shields.io/badge/part%20of-BWOC-6f42c1">
   <img alt="Mechanism" src="https://img.shields.io/badge/mechanism-wraps%20bwoc%20CLI-informational">
@@ -23,7 +23,7 @@
 It is **declarative + shell-out**: the plugin ships slash commands, sub-agents, skills, and hooks that wrap the `bwoc` CLI. No background server, no daemon.
 
 > [!NOTE]
-> **Status: stable (v1.3.0).** All components ship and pass the structural smoke
+> **Status: stable (v1.3.1).** All components ship and pass the structural smoke
 > (`./scripts/validate.sh`): manifests, command **and** skill frontmatter, hook events,
 > marketplace source, and CLI presence. The plugin exposes 8 slash commands, eight bundled
 > skills (`bwoc-fleet`, `bwoc-health`, `bwoc-lifecycle`, `bwoc-knowledge`, `bwoc-quality`,
