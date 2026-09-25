@@ -32,6 +32,11 @@ jobs:
         # `bwoc` isn't on PATH in CI — validate.sh treats that as an advisory
         # warning (exit 0), since it gates structure, not the runtime CLI.
         run: bash scripts/validate.sh
+      - name: Claude Code manifest schema (claude plugin validate)
+        # The real loader's schema, latest CLI: catches what installs reject
+        # but a JSON check passes (1.3.0's `"agents": "./agents/"` →
+        # "agents: Invalid input"). Needs no login.
+        run: npx --yes -p @anthropic-ai/claude-code claude plugin validate .
 
   cli-contract:
     name: CLI contract (latest bwoc release)

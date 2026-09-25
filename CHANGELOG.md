@@ -6,6 +6,10 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **CI runs `claude plugin validate .`** with the latest Claude Code CLI, so a manifest the real loader rejects fails the PR instead of the install (as 1.3.0's `"agents": "./agents/"` did).
+
 ## [1.3.1] - 2026-09-24
 
 ### Fixed
