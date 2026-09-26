@@ -44,9 +44,11 @@ def snippets(text):
 
 def argvs(cmd):
     """The argv lists one documented command stands for (alternatives expanded)."""
+    # Drop [optional …] groups first: one may hold ` | ` alternatives, which
+    # the shell-operator split below would otherwise cut through.
+    cmd = re.sub(r"\[[^\]]*\]", "", cmd)
     cmd = re.split(r"\s+#|\s*(?:\|\||&&|;|\s\|\s)", cmd)[0]
     cmd = re.sub(r"<[^>]*>", PLACEHOLDER, cmd)  # <agent>, "<title>"
-    cmd = re.sub(r"\[[^\]]*\]", "", cmd)  # [optional …]
     cmd = cmd.replace("$ARGUMENTS", "").replace("…", "").replace("...", "")
     try:
         tokens = shlex.split(cmd)[1:]
