@@ -107,5 +107,11 @@ First stable release — the BWOC fleet adapter for Claude Code.
   exist, every command carries frontmatter with a `description:`, hook events and
   types are valid, and the marketplace source resolves.
 
+[Unreleased]: https://github.com/bemindlabs/bwoc-plugin-claude/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.3.1
+[1.3.0]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.3.0
+[1.2.0]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.2.0
+[1.1.2]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.1.2
+[1.1.1]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.1.1
 [1.1.0]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.1.0
 [1.0.0]: https://github.com/bemindlabs/bwoc-plugin-claude/releases/tag/v1.0.0
