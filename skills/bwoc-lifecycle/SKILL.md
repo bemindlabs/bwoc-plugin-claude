@@ -46,7 +46,8 @@ neutrality.
 ```bash
 bwoc stop <name>               # pause: set status = "stopped" (files kept); --all for the fleet
 bwoc start <name>              # reactivate a stopped agent; --all to resume the fleet
-bwoc chat <agent>              # open the agent's backend interactively (surface to the user); low-level: bwoc spawn --path <dir> --backend <b>
+bwoc chat <agent>              # open the agent's backend interactively (surface to the user)
+bwoc spawn --path <dir> --backend <backend>   # low-level form of `chat`: explicit dir + backend
 bwoc supervise <agent>        # keep the daemon up: restart on crash, exit cleanly when stopped
 ```
 
@@ -75,7 +76,7 @@ firing it, and report exactly what was removed.
 
 ## Safety
 
-- `new`, `stop`, `start`, `retire`, `debase set`, `supervise` are **mutating** — confirm
+- `new`, `stop`, `start`, `set`, `retire`, `debase set`, `supervise` are **mutating** — confirm
   before running them against a live workspace.
 - Never hand-edit agent directories; let these verbs keep `.bwoc/agents.toml` authoritative.
 - After any incarnation or edit, run `bwoc check <agent-path>` (or `bwoc check --all`).

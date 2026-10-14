@@ -39,16 +39,18 @@ fi
 
 # 3. Every command has frontmatter with a description.
 shopt -s nullglob
-cmds=(commands/*.md)
+cmd_dir=$(jq -r '.commands // "./commands/"' .claude-plugin/plugin.json 2>/dev/null)
+cmd_dir="${cmd_dir%/}"
+cmds=("$cmd_dir"/*.md)
 if [ ${#cmds[@]} -eq 0 ]; then
-  bad "no command files under commands/"
+  bad "no command files under $cmd_dir/"
 else
   for c in "${cmds[@]}"; do
     if [ "$(head -1 "$c")" != "---" ]; then bad "$c: missing frontmatter (--- on line 1)"; continue; fi
-    if awk '/^---$/{n++; next} n==1 && /^description:/{found=1} END{exit !found}' "$c"; then
+    if awk '/^---$/{n++; next} n==1 && /^description:/{found=1} END{exit !(found && n>=2)}' "$c"; then
       ok "$(basename "$c") frontmatter + description"
     else
-      bad "$c: frontmatter has no 'description:'"
+      bad "$c: frontmatter has no 'description:' (or no closing ---)"
     fi
   done
 fi
@@ -61,10 +63,10 @@ else
   for s in "${skills[@]}"; do
     base="$(basename "$(dirname "$s")")"
     if [ "$(head -1 "$s")" != "---" ]; then bad "$s: missing frontmatter (--- on line 1)"; continue; fi
-    if awk '/^---$/{n++; next} n==1 && /^name:/{name=1} n==1 && /^description:/{desc=1} END{exit !(name && desc)}' "$s"; then
+    if awk '/^---$/{n++; next} n==1 && /^name:/{name=1} n==1 && /^description:/{desc=1} END{exit !(name && desc && n>=2)}' "$s"; then
       ok "skill $base frontmatter (name + description)"
     else
-      bad "$s: frontmatter needs both 'name:' and 'description:'"
+      bad "$s: frontmatter needs both 'name:' and 'description:' and a closing ---"
     fi
   done
 fi
@@ -82,6 +84,9 @@ else
 fi
 
 # 5. Marketplace source resolves.
+if ! jq -e '(.plugins | type == "array") and (.plugins | length > 0) and all(.plugins[]; .source | type == "string")' .claude-plugin/marketplace.json >/dev/null 2>&1; then
+  bad "marketplace.json needs a non-empty plugins[] whose entries each have a string source"
+fi
 for src in $(jq -r '.plugins[].source' .claude-plugin/marketplace.json 2>/dev/null); do
   if [ -e "$src" ] || [ "$src" = "./" ]; then ok "marketplace source $src resolves"; else bad "marketplace source $src does not exist"; fi
 done
@@ -98,7 +103,7 @@ fi
 #    Commands are named commands/bwoc-<verb>.md; we check `bwoc <verb> --help` resolves.
 #    This is advisory (warn, not fail) so the structural gate stays runtime-independent.
 if command -v bwoc >/dev/null 2>&1; then
-  for c in commands/bwoc-*.md; do
+  for c in "$cmd_dir"/bwoc-*.md; do
     [ -e "$c" ] || continue
     verb="$(basename "$c" .md)"; verb="${verb#bwoc-}"
     if bwoc "$verb" --help >/dev/null 2>&1; then
